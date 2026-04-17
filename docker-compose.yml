@@ -1,0 +1,9 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: bookmark_user
+      POSTGRES_PASSWORD: bookmark_pass
+      POSTGRES_DB: bookmarks
+    ports:
+      - "5433:5432"
