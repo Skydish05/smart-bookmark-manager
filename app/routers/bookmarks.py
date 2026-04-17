@@ -4,7 +4,7 @@ from app.schemas.bookmark import BookmarkCreate, BookmarkUpdate
 from app.models.bookmark import Bookmark
 from app.dependencies import get_db
 from app.services.scraper import scrape_metadata
-
+from app.services.summarizer import generate_summary
 
 router = APIRouter()
 
@@ -19,6 +19,8 @@ async def create_bookmark(bookmark: BookmarkCreate, db: Session = Depends(get_db
     metadata = await scrape_metadata(bookmark.url)
     new_bookmark.title = metadata["title"]
     new_bookmark.description = metadata["description"]
+    if metadata["description"]:
+        new_bookmark.summary = await generate_summary(metadata["description"])
     db.commit()
     db.refresh(new_bookmark)
     return new_bookmark
