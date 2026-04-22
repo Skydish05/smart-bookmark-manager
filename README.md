@@ -16,7 +16,10 @@ uvicorn app.main:app --reload --port 8001
 
 5. Open http://localhost:8001/docs to use the API
 
-## Features so far
+## Features 
+- User registration and login with JWT authentication
 - Save bookmarks (URL + optional tags)
 - Auto-fetch page title and description
-- List, view, update, delete bookmarks
+- AI-powered summaries using Groq
+- Search across title, description, summary, and tags
+- Each user only sees their own bookmarks
